@@ -3,6 +3,8 @@ import requests
 OLLAMA_URL = "http://localhost:11434/api/chat"
 MODEL = "mistral"  # or "mistral"
 
+SYSTEM_PROMPT = """You are a helpful assistant for software developers. You can answer questions about programming, algorithms, data structures, and software design. You can also provide code snippets and explanations to help developers solve their problems."""
+
 
 def get_text_response(prompt):
     response = requests.post(
