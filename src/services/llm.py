@@ -22,7 +22,7 @@ def get_text_response(prompt):
     with open("response.json", "w") as f:
         f.write(response.text)
 
-    return response.json().get("choices", [{}])[0].get("message", {}).get("content", "")
+    return response.json().get("message", {}).get("content", "").strip()
 
 def ask_llm(prompt):
     response = requests.post(
