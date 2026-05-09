@@ -3,17 +3,15 @@ import requests
 OLLAMA_URL = "http://localhost:11434/api/chat"
 MODEL = "mistral"  # or "mistral"
 
-SYSTEM_PROMPT = """You are a helpful assistant for software developers. You can answer questions about programming, algorithms, data structures, and software design. You can also provide code snippets and explanations to help developers solve their problems."""
 
-
-def get_text_response(prompt):
+def get_text_response(system_prompt, user_prompt):
     response = requests.post(
         OLLAMA_URL,
         json={
             "model": MODEL,
             "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt}
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
             ],
             "temperature": 0.2,
             "max_tokens": 300,
@@ -70,5 +68,5 @@ if __name__ == "__main__":
         user_input = input("Ask a question (or 'exit' to quit): ")
         if user_input.lower() == "exit":
             break
-        answer = get_text_response(user_input)
+        answer = get_text_response(SYSTEM_PROMPT, user_input)
         print("Answer:", answer)
